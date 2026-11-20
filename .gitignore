@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.cloudflare/
 test-results/
 playwright-report/
 .env

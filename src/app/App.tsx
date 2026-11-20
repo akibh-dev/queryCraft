@@ -8,6 +8,8 @@ import { Preferences } from "../features/preferences/Preferences";
 import { createProgressStore, progressKey } from "../storage";
 import { BrandMark, InfoIcon, MapIcon, SettingsIcon } from "../ui";
 import { usePathname } from "./navigation";
+import { OfflineUpdate } from "./OfflineUpdate";
+import { PageBoundary } from "./PageBoundary";
 import { clearSession, Play, submitted } from "./Play";
 import { resolveRoute } from "./routes";
 
@@ -94,7 +96,10 @@ export function App() {
   const route = resolveRoute(pathname, progress.completions);
   useEffect(() => {
     const sync = (e: StorageEvent) => {
-      if (e.key === null || e.key === progressKey) store.loadProgress();
+      if (e.key === null || e.key === progressKey) {
+        if (e.newValue === null) clearSession();
+        store.loadProgress();
+      }
     };
     window.addEventListener("storage", sync);
     return () => window.removeEventListener("storage", sync);
@@ -173,7 +178,10 @@ export function App() {
               : "Progress is available for this session. Export it in Settings to keep a copy."}
           </p>
         )}
-        <PageBody route={route} progress={progress} />
+        <OfflineUpdate />
+        <PageBoundary key={pathname}>
+          <PageBody route={route} progress={progress} />
+        </PageBoundary>
       </main>
     </>
   );

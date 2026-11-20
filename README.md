@@ -4,7 +4,7 @@ QueryCraft is a six-puzzle browser game about SQL query performance. Choose inde
 
 ## Run locally
 
-Use Node 24.18.0 and pnpm 12.21.0.
+Use Node 24.22.0 and pnpm 12.21.0.
 
 ```sh
 pnpm install --frozen-lockfile
@@ -12,6 +12,8 @@ pnpm dev
 ```
 
 Open the local address printed by Vite and choose **Play**. To try the production build and offline mode, use `pnpm build` followed by `pnpm preview`. Open the preview online once so the service worker can cache the game. The development server skips service worker registration.
+
+Run `pnpm build:cloudflare` to build the game and package `dist` for Cloudflare Workers using the pinned `cf` CLI. The dry run writes `.cloudflare/output` and checks the assets locally. To deploy the validated bundle from an authorized Cloudflare account, run `pnpm exec cf deploy --prebuilt`.
 
 ## Verify changes
 
