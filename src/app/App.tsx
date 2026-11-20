@@ -1,57 +1,30 @@
 import { useEffect, useRef, useSyncExternalStore } from "react";
+import { version as gameVersion } from "../../package.json";
 import { catalog } from "../content";
+import type { Progress } from "../domain";
+import { Debrief, Landing, LevelMap } from "../features/campaign";
+import { Model } from "../features/preferences/Model";
+import { Preferences } from "../features/preferences/Preferences";
 import { createProgressStore, progressKey } from "../storage";
-import {
-  actionClassName,
-  BrandMark,
-  InfoIcon,
-  MapIcon,
-  Panel,
-  PlayIcon,
-  SettingsIcon,
-} from "../ui";
+import { BrandMark, InfoIcon, MapIcon, SettingsIcon } from "../ui";
 import { usePathname } from "./navigation";
-import { Play, submitted } from "./Play";
-import { resolveRoute, tutorialPath } from "./routes";
+import { clearSession, Play, submitted } from "./Play";
+import { resolveRoute } from "./routes";
+
+import styles from "./shell.module.css";
 
 const store = createProgressStore(catalog.map((entry) => entry.level));
 store.loadProgress();
 
-import styles from "./shell.module.css";
-
 type Route = ReturnType<typeof resolveRoute>;
 
-function PageBody({ route }: { route: Route }) {
+function PageBody({ route, progress }: { route: Route; progress: Progress }) {
   const toMap = <a href="/levels">Back to level map</a>;
   switch (route.kind) {
     case "home":
-      return (
-        <>
-          <p>
-            Choose indexes for a slow SQL query and explore what faster reads
-            cost in storage and writes.
-          </p>
-          <div className={styles.actions}>
-            <a className={actionClassName()} href={tutorialPath}>
-              <PlayIcon />
-              Play
-            </a>
-            <a className={actionClassName("secondary")} href="/levels">
-              View levels
-            </a>
-          </div>
-        </>
-      );
+      return <Landing catalog={catalog} completions={progress.completions} />;
     case "map":
-      return (
-        <Panel className={styles.puzzle}>
-          <h2>{catalog[0].level.title}</h2>
-          <p>{catalog[0].level.description}</p>
-          <a className={actionClassName()} href={tutorialPath}>
-            Open level
-          </a>
-        </Panel>
-      );
+      return <LevelMap catalog={catalog} completions={progress.completions} />;
     case "challenge":
       return (
         <Play
@@ -69,42 +42,31 @@ function PageBody({ route }: { route: Route }) {
           {toMap}
         </>
       );
-    case "debrief": {
-      const { level } = route.entry;
-      const path = `/levels/${level.id}`;
-      const record = route.record && (submitted.get(level.id) ?? route.record);
-      const next = catalog[route.index + 1];
-      return record ? (
-        <>
-          <p>{record.stars} of 3 stars</p>
-          <p>{level.lesson}</p>
-          <div className={styles.actions}>
-            {next && <a href={`/levels/${next.level.id}`}>Next level</a>}
-            <a href={path}>Replay</a>
-            {toMap}
-          </div>
-        </>
-      ) : (
-        <>
-          <p>Complete {level.title} to see your result here.</p>
-          <div className={styles.actions}>
-            <a href={path}>Open level</a>
-            {toMap}
-          </div>
-        </>
+    case "debrief":
+      return (
+        <Debrief
+          entry={route.entry}
+          record={
+            route.record &&
+            (submitted.get(route.entry.level.id) ?? route.record)
+          }
+          next={catalog[route.index + 1]}
+        />
       );
-    }
     case "model":
       return (
-        <p>
-          QueryCraft estimates the cost of reading virtual tables and
-          maintaining B-tree indexes. The model assumes a cold cache for each
-          query.
-        </p>
+        <Model
+          version={catalog[0].level.modelVersion}
+          gameVersion={gameVersion}
+        />
       );
     case "settings":
       return (
-        <p>Theme, motion, and saved progress controls are in development.</p>
+        <Preferences
+          store={store}
+          settings={progress.settings}
+          onReset={clearSession}
+        />
       );
     case "missingLevel":
       return (
@@ -191,7 +153,12 @@ export function App() {
           </nav>
         </div>
       </header>
-      <main id="content" tabIndex={-1} className={styles.content}>
+      <main
+        data-route={route.kind}
+        id="content"
+        tabIndex={-1}
+        className={styles.content}
+      >
         <h1
           ref={heading}
           tabIndex={-1}
@@ -206,7 +173,7 @@ export function App() {
               : "Progress is available for this session. Export it in Settings to keep a copy."}
           </p>
         )}
-        <PageBody route={route} />
+        <PageBody route={route} progress={progress} />
       </main>
     </>
   );

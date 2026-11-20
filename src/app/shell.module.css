@@ -83,8 +83,7 @@
 .content {
 	grid-template-columns: minmax(0, 1fr);
 }
-.content:has(:global([role="tablist"])),
-.content:has(:global(pre)) {
+.content[data-route="challenge"] {
 	max-width: 100rem;
 	width: 100%;
 }
