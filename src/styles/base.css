@@ -1,0 +1,132 @@
+:root {
+	color-scheme: dark;
+	--canvas: light-dark(#f3f6f5, #10161a);
+	--panel: light-dark(#ffffff, #182126);
+	--inset: light-dark(#eaf0ef, #202d32);
+	--text: light-dark(#142024, #f1f6f4);
+	--muted: light-dark(#455c60, #b0c1c2);
+	--rule: light-dark(#c2d0ce, #405156);
+	--control-border: light-dark(#677c7d, #849b9b);
+	--accent: light-dark(#00685b, #66dfca);
+	--on-accent: light-dark(#ffffff, #092721);
+	--success: light-dark(#17683c, #8ce0a6);
+	--warning: light-dark(#785100, #f1c979);
+	--error: light-dark(#a42e2b, #ffaba3);
+	--font-ui: Inter, system-ui, sans-serif;
+	--font-mono: "IBM Plex Mono", ui-monospace, monospace;
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--radius-control: 8px;
+	--radius-panel: 12px;
+	--touch-target: 44px;
+}
+
+[data-theme="light"] {
+	color-scheme: light;
+}
+
+[data-theme="dark"] {
+	color-scheme: dark;
+}
+
+[data-theme="system"] {
+	color-scheme: light dark;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	font: 1rem / 1.5 var(--font-ui);
+	font-variant-numeric: tabular-nums;
+	background-color: var(--canvas);
+	color: var(--text);
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+	overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+h2 {
+	font-size: 1.25rem;
+}
+
+p {
+	max-inline-size: 65ch;
+}
+
+code,
+pre,
+kbd {
+	font: 0.875rem / 1.5 var(--font-mono);
+}
+
+a {
+	color: var(--accent);
+	text-underline-offset: 0.2em;
+}
+
+button,
+input,
+select,
+textarea {
+	font: inherit;
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+@media (forced-colors: active) {
+	:focus-visible {
+		outline-color: Highlight;
+	}
+}
+
+/* biome-ignore-start lint/complexity/noImportantStyles: Motion preferences must override individual component animations. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+[data-reduce-motion="true"],
+[data-reduce-motion="true"]::before,
+[data-reduce-motion="true"]::after,
+[data-reduce-motion="true"] *,
+[data-reduce-motion="true"] *::before,
+[data-reduce-motion="true"] *::after {
+	animation: none !important;
+	transition: none !important;
+	scroll-behavior: auto !important;
+}
+/* biome-ignore-end lint/complexity/noImportantStyles: End motion preferences. */
