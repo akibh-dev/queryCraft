@@ -549,3 +549,1110 @@ exports[`validates the fixture, objectives and every optional selection for Need
   ],
 }
 `;
+
+exports[`validates the fixture, objectives and every optional selection for Pocket Directory 1`] = `
+{
+  "initial": [
+    "idx_regions_code",
+  ],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 0,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 4,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 4,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 0,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.12008,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.121,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 1.004,
+        "estimatedLatencyMs": 0.12008,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 4,
+        "sequentialPagesRead": 1,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of regions",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 8192,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 0,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 4,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 4,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 0,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.12008,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.121,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_regions_code",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 1.004,
+        "estimatedLatencyMs": 0.12008,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 8192,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 4,
+        "sequentialPagesRead": 1,
+        "writeOverheadPct": 3,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of regions",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;
+
+exports[`validates the fixture, objectives and every optional selection for Range Runner 1`] = `
+{
+  "initial": [],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 100000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 200,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 2000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1610000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 1.6,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 3225,
+        "estimatedLatencyMs": 64.6,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 200,
+        "randomPagesRead": 0,
+        "rowsExamined": 100000,
+        "sequentialPagesRead": 3125,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of scores",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 200,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 200,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1605632,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 2000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1605632,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1610000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 1.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 1.6,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_scores_points",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 784.2,
+        "estimatedLatencyMs": 15.784,
+        "indexPagesTraversed": 2,
+        "indexStorageBytes": 1605632,
+        "matchingRows": 200,
+        "randomPagesRead": 196,
+        "rowsExamined": 200,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 1.5,
+      },
+      "plan": {
+        "indexId": "idx_scores_points",
+        "kind": "range",
+        "steps": [
+          "B-tree range scan on scores.points",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 100000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 200,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1605632,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 2000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1605632,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1610000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 1.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 1.6,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_scores_player_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 3225,
+        "estimatedLatencyMs": 64.6,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 1605632,
+        "matchingRows": 200,
+        "randomPagesRead": 0,
+        "rowsExamined": 100000,
+        "sequentialPagesRead": 3125,
+        "writeOverheadPct": 1.5,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of scores",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 200,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 200,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 3211264,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 2000000,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 3211264,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1610000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 1.6,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_scores_player_id",
+        "idx_scores_points",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 784.2,
+        "estimatedLatencyMs": 15.784,
+        "indexPagesTraversed": 2,
+        "indexStorageBytes": 3211264,
+        "matchingRows": 200,
+        "randomPagesRead": 196,
+        "rowsExamined": 200,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 3,
+      },
+      "plan": {
+        "indexId": "idx_scores_points",
+        "kind": "range",
+        "steps": [
+          "B-tree range scan on scores.points",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;
+
+exports[`validates the fixture, objectives and every optional selection for The Common Case 1`] = `
+{
+  "initial": [
+    "idx_jobs_status",
+  ],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 0,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 25.540000000000003,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 26,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 0,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 100000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 100000,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 1272,
+        "estimatedLatencyMs": 25.540000000000003,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 50000,
+        "randomPagesRead": 0,
+        "rowsExamined": 100000,
+        "sequentialPagesRead": 1172,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of jobs",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 1605632,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 0,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 25.540000000000003,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 26,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 12,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 0,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 100000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 100000,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_jobs_status",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 1272,
+        "estimatedLatencyMs": 25.540000000000003,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 1605632,
+        "matchingRows": 50000,
+        "randomPagesRead": 0,
+        "rowsExamined": 100000,
+        "sequentialPagesRead": 1172,
+        "writeOverheadPct": 12,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of jobs",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;
+
+exports[`validates the fixture, objectives and every optional selection for The Price of an Index 1`] = `
+{
+  "initial": [
+    "idx_events_actor_id",
+    "idx_events_category",
+  ],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 300000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 123.3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 6160,
+        "estimatedLatencyMs": 123.3,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 300000,
+        "sequentialPagesRead": 5860,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of events",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 40.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 12001280,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.42002000000000006,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_request_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 12001280,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 40.5,
+      },
+      "plan": {
+        "indexId": "idx_events_request_id",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on events.request_id",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 300000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 40.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 4800512,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 123.3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_actor_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 6160,
+        "estimatedLatencyMs": 123.3,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 4800512,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 300000,
+        "sequentialPagesRead": 5860,
+        "writeOverheadPct": 40.5,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of events",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 81,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 16801792,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.42002000000000006,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_actor_id",
+        "idx_events_request_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 16801792,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 81,
+      },
+      "plan": {
+        "indexId": "idx_events_request_id",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on events.request_id",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 300000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 40.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 6004736,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 123.3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_category",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 6160,
+        "estimatedLatencyMs": 123.3,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 6004736,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 300000,
+        "sequentialPagesRead": 5860,
+        "writeOverheadPct": 40.5,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of events",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 81,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 18006016,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.42002000000000006,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_category",
+        "idx_events_request_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 18006016,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 81,
+      },
+      "plan": {
+        "indexId": "idx_events_request_id",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on events.request_id",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 300000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 81,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 10805248,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 123.3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_actor_id",
+        "idx_events_category",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 6160,
+        "estimatedLatencyMs": 123.3,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 10805248,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 300000,
+        "sequentialPagesRead": 5860,
+        "writeOverheadPct": 81,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of events",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 121.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 50,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 22806528,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 12100000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 0.42002000000000006,
+          "objective": {
+            "comparator": "<=",
+            "metric": "estimatedLatencyMs",
+            "value": 0.43,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_events_actor_id",
+        "idx_events_category",
+        "idx_events_request_id",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 22806528,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 121.5,
+      },
+      "plan": {
+        "indexId": "idx_events_request_id",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on events.request_id",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;

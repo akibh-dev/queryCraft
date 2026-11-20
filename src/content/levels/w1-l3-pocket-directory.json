@@ -1,0 +1,97 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l3-pocket-directory",
+	"worldId": "w1",
+	"title": "Pocket Directory",
+	"description": "The regional directory holds just four entries. Find the northeast region while freeing the storage used by editable indexes.",
+	"conceptTags": ["Small tables", "Sequential scan"],
+	"table": {
+		"name": "regions",
+		"rowCount": 4,
+		"avgRowBytes": 64,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 4
+				}
+			},
+			{
+				"name": "code",
+				"type": "text",
+				"averageBytes": 2,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 4
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_regions",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 80,
+		"insertsPerSecond": 20,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "regions",
+		"select": ["id"],
+		"predicates": [
+			{
+				"op": "eq",
+				"column": "code",
+				"value": "NE"
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_regions_code",
+			"column": "code"
+		}
+	],
+	"initialIndexIds": ["idx_regions_code"],
+	"objectives": [
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 0
+		},
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 4
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 0
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "estimatedLatencyMs",
+			"comparator": "<=",
+			"value": 0.121
+		}
+	],
+	"hints": [
+		"How many data pages hold this table?",
+		"Opening the index has a cost, too.",
+		"Remove the code index and compare the estimated latency."
+	],
+	"lesson": "The directory fits on a single data page. A sequential scan already reads that page directly. Removing the unused index frees storage and eliminates its maintenance cost.",
+	"fixtureId": "w1-l3-pocket-directory-sample"
+}

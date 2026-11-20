@@ -1,0 +1,97 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l5-the-common-case",
+	"worldId": "w1",
+	"title": "The Common Case",
+	"description": "A dispatch report lists every open job. Half the queue is open. Meet the report deadline while freeing editable index storage.",
+	"conceptTags": ["Broad filters", "Sequential access"],
+	"table": {
+		"name": "jobs",
+		"rowCount": 100000,
+		"avgRowBytes": 96,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 100000
+				}
+			},
+			{
+				"name": "status",
+				"type": "text",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 2
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_jobs",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 60,
+		"insertsPerSecond": 40,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "jobs",
+		"select": ["id"],
+		"predicates": [
+			{
+				"op": "eq",
+				"column": "status",
+				"value": "open"
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_jobs_status",
+			"column": "status"
+		}
+	],
+	"initialIndexIds": ["idx_jobs_status"],
+	"objectives": [
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 0
+		},
+		{
+			"metric": "estimatedLatencyMs",
+			"comparator": "<=",
+			"value": 26
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 0
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 100000
+		}
+	],
+	"hints": [
+		"What fraction of the queue is open?",
+		"A lookup can still fetch thousands of pages.",
+		"Compare the scan with the status-index candidate, then remove the unused index."
+	],
+	"lesson": "Half the jobs match. Following this many index entries fetches scattered table pages, making one sequential pass cheaper in the model. Removing the unused index also frees its storage.",
+	"fixtureId": "w1-l5-the-common-case-sample"
+}

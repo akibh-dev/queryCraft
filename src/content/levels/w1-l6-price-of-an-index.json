@@ -1,0 +1,123 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l6-price-of-an-index",
+	"worldId": "w1",
+	"title": "The Price of an Index",
+	"description": "An event collector spends most of its time inserting new rows. Speed up request lookups while keeping the extra work on writes within budget.",
+	"conceptTags": ["Write overhead", "Index maintenance"],
+	"table": {
+		"name": "events",
+		"rowCount": 300000,
+		"avgRowBytes": 160,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 300000
+				}
+			},
+			{
+				"name": "request_id",
+				"type": "text",
+				"averageBytes": 32,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 300000
+				}
+			},
+			{
+				"name": "actor_id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 30000
+				}
+			},
+			{
+				"name": "category",
+				"type": "text",
+				"averageBytes": 12,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 12
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_events",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 10,
+		"insertsPerSecond": 90,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "events",
+		"select": ["id"],
+		"predicates": [
+			{
+				"op": "eq",
+				"column": "request_id",
+				"value": "req-42"
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_events_request_id",
+			"column": "request_id"
+		},
+		{
+			"id": "idx_events_actor_id",
+			"column": "actor_id"
+		},
+		{
+			"id": "idx_events_category",
+			"column": "category"
+		}
+	],
+	"initialIndexIds": ["idx_events_actor_id", "idx_events_category"],
+	"objectives": [
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 1
+		},
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 50
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 12100000
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "estimatedLatencyMs",
+			"comparator": "<=",
+			"value": 0.43
+		}
+	],
+	"hints": [
+		"Which two constraints must pass together?",
+		"Every enabled index needs upkeep when events arrive.",
+		"Keep request_id; try removing actor_id and category."
+	],
+	"lesson": "A request ID lookup needs one matching key. Every other maintained index adds work to this write-heavy collector without helping this particular query.",
+	"fixtureId": "w1-l6-price-of-an-index-sample"
+}
