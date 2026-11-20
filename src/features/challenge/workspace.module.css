@@ -1,0 +1,172 @@
+.workspace,
+.section {
+	min-width: 0;
+	display: grid;
+	gap: var(--space-4);
+}
+.workspace {
+	width: 100%;
+}
+.workspace ul,
+.workspace ol {
+	padding-inline-start: 1.4rem;
+	margin-block: 0;
+}
+.goal {
+	font-weight: 600;
+}
+.columns {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--space-4);
+	align-items: start;
+}
+.section {
+	align-content: start;
+	padding: clamp(1rem, 2vw, 1.5rem);
+}
+.section[hidden] {
+	display: none;
+}
+.section h2 {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+.section h2 svg {
+	color: var(--accent);
+}
+.section h3 {
+	font-size: 1rem;
+}
+.section p,
+.section li {
+	overflow-wrap: anywhere;
+}
+.section button {
+	justify-self: start;
+}
+.sql {
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+	border-radius: var(--radius-control);
+	padding: var(--space-4);
+	background: var(--inset);
+	margin: 0;
+}
+.section summary {
+	cursor: pointer;
+	min-height: 44px;
+	padding-block: 0.6rem;
+	color: var(--accent);
+	font-weight: 600;
+}
+.workspace .objectives {
+	display: grid;
+	gap: var(--space-4);
+	list-style: none;
+	padding: 0;
+}
+.objectives li {
+	display: grid;
+	gap: 0.15rem;
+}
+.objectives span,
+.reason {
+	color: var(--muted);
+	font-size: 0.875rem;
+}
+.objectives [data-met="true"] {
+	color: var(--success);
+}
+.objectives [data-met="false"] {
+	color: var(--warning);
+}
+.steps li {
+	padding-block: 0.2rem;
+}
+.scroll {
+	overflow-x: auto;
+	min-width: 0;
+}
+.scroll table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 0.875rem;
+}
+.scroll caption {
+	font-weight: 700;
+	text-align: start;
+	margin-bottom: 0.5rem;
+}
+.scroll th,
+.scroll td {
+	text-align: start;
+	vertical-align: top;
+	border-bottom: 1px solid var(--rule);
+	padding: 0.45rem;
+}
+.scroll th:first-child {
+	padding-inline-start: 0;
+}
+.tabs,
+.actions {
+	display: flex;
+	gap: var(--space-2);
+	flex-wrap: wrap;
+	align-items: start;
+}
+.tabs button {
+	flex: 1;
+	padding: 0.5rem;
+	min-height: 44px;
+	border: 1px solid var(--control-border);
+	background: var(--panel);
+	color: var(--text);
+	border-radius: var(--radius-control);
+	cursor: pointer;
+}
+.tabs [aria-selected="true"] {
+	color: var(--accent);
+	background: var(--inset);
+	border-color: var(--accent);
+	font-weight: 700;
+}
+.notice:empty {
+	margin: 0;
+	height: 0;
+}
+.actions {
+	padding-block: var(--space-3);
+}
+.reason {
+	flex-basis: 100%;
+}
+@media (min-width: 768px) {
+	.columns {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	}
+	.section:first-child {
+		grid-column: 1 / -1;
+	}
+}
+@media (min-width: 1200px) {
+	.columns {
+		grid-template-columns: minmax(0, 25fr) minmax(0, 38fr) minmax(0, 37fr);
+	}
+	.section:first-child {
+		grid-column: auto;
+	}
+}
+@media (max-width: 767px) {
+	.actions {
+		position: sticky;
+		bottom: 0;
+		background: var(--canvas);
+		border-top: 1px solid var(--rule);
+		padding-bottom: calc(var(--space-2) + env(safe-area-inset-bottom));
+	}
+	.workspace :is(button, input, a, summary) {
+		scroll-margin-bottom: 11rem;
+	}
+}
