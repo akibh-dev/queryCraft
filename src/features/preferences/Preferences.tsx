@@ -13,6 +13,22 @@ export function Preferences({
   settings: Settings;
   onReset: () => void;
 }) {
+  const [pendingSettings, setPendingSettings] = useState<Settings | null>(null);
+  const revision = useRef(0);
+  const selected = pendingSettings ?? settings;
+  async function changeSettings(next: Settings) {
+    const current = ++revision.current;
+    setPendingSettings(next);
+    await store.saveSettings(next);
+    if (current === revision.current) {
+      setPendingSettings(null);
+      setNotice(
+        store.getSnapshot().status === "saved"
+          ? "Preferences saved."
+          : "Preferences applied for this session.",
+      );
+    }
+  }
   const [preview, setPreview] = useState<{
     json: string;
     count: number;
@@ -69,8 +85,8 @@ export function Preferences({
               type="radio"
               name="theme"
               label={theme[0].toUpperCase() + theme.slice(1)}
-              checked={settings.theme === theme}
-              onChange={() => void store.saveSettings({ ...settings, theme })}
+              checked={selected.theme === theme}
+              onChange={() => void changeSettings({ ...selected, theme })}
             />
           ))}
         </FieldGroup>
@@ -81,10 +97,10 @@ export function Preferences({
           <ChoiceField
             type="checkbox"
             label="Reduce motion"
-            checked={settings.reduceMotion}
+            checked={selected.reduceMotion}
             onChange={(e) =>
-              void store.saveSettings({
-                ...settings,
+              void changeSettings({
+                ...selected,
                 reduceMotion: e.target.checked,
               })
             }

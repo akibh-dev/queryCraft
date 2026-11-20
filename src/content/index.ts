@@ -5,19 +5,41 @@ import {
   validateFixture,
   validateLevel,
 } from "../domain";
-import emailFixture from "./fixtures/w1-l1-needle-in-a-million.json" with { type: "json" };
-import namesFixture from "./fixtures/w1-l2-name-collision.json" with { type: "json" };
-import directoryFixture from "./fixtures/w1-l3-pocket-directory.json" with { type: "json" };
-import rangeFixture from "./fixtures/w1-l4-range-runner.json" with { type: "json" };
-import commonFixture from "./fixtures/w1-l5-the-common-case.json" with { type: "json" };
-import priceFixture from "./fixtures/w1-l6-price-of-an-index.json" with { type: "json" };
-import emailLevel from "./levels/w1-l1-needle-in-a-million.json" with { type: "json" };
-import namesLevel from "./levels/w1-l2-name-collision.json" with { type: "json" };
+import emailFixture from "./fixtures/w1-l1-needle-in-a-million.json" with {
+  type: "json",
+};
+import namesFixture from "./fixtures/w1-l2-name-collision.json" with {
+  type: "json",
+};
+import directoryFixture from "./fixtures/w1-l3-pocket-directory.json" with {
+  type: "json",
+};
+import rangeFixture from "./fixtures/w1-l4-range-runner.json" with {
+  type: "json",
+};
+import commonFixture from "./fixtures/w1-l5-the-common-case.json" with {
+  type: "json",
+};
+import priceFixture from "./fixtures/w1-l6-price-of-an-index.json" with {
+  type: "json",
+};
+import emailLevel from "./levels/w1-l1-needle-in-a-million.json" with {
+  type: "json",
+};
+import namesLevel from "./levels/w1-l2-name-collision.json" with {
+  type: "json",
+};
 
-import directoryLevel from "./levels/w1-l3-pocket-directory.json" with { type: "json" };
+import directoryLevel from "./levels/w1-l3-pocket-directory.json" with {
+  type: "json",
+};
 import rangeLevel from "./levels/w1-l4-range-runner.json" with { type: "json" };
-import commonLevel from "./levels/w1-l5-the-common-case.json" with { type: "json" };
-import priceLevel from "./levels/w1-l6-price-of-an-index.json" with { type: "json" };
+import commonLevel from "./levels/w1-l5-the-common-case.json" with {
+  type: "json",
+};
+import priceLevel from "./levels/w1-l6-price-of-an-index.json" with {
+  type: "json",
+};
 
 export type CampaignEntry = { level: LevelDefinition; fixture: Fixture };
 
