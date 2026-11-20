@@ -22,6 +22,14 @@ Each row is a separate assignment. The coordinator can run every ready ticket in
 | D4 Release materials     | D1          | Documentation agent: README, docs/, contributor and release documents  | Record actual commands, assumptions, authoring steps, licensing and verified screenshots. Use release guide checklist.                                                                                                 |
 | E1 Release               | D2–D4       | Coordinator                                                            | Complete preview checks and release process in guide 05. Record deployment identifier, hostname and smoke-test result.                                                                                                 |
 
+## Phase branches and review
+
+Use one Forgejo PR per phase. A0 is the bootstrap phase on `a0-foundation`. Group the remaining queue into A (A1–A3), B (B1–B4), C (C1–C4), D (D1–D4) and E (E1). Tickets in the same phase can run concurrently once their prerequisites land on the phase branch. For E, submit release preparation for review and perform the authorized publication and live checks after merge.
+
+For a new repository, verify that Forgejo has a `main` base before opening the first PR. If it is missing, establish a common baseline with the owner. The initial A0 commit already contains the scaffold, so pointing `main` at that commit would make those files part of the baseline and exclude them from the first PR diff.
+
+Run the full available checks locally before requesting review. Merge on Forgejo, then verify GitHub Actions against the mirrored merge SHA. See the [repository workflow](../AGENTS.md) for commit, handoff and failure handling.
+
 ## Standard local checks
 
 A0 supplies package scripts for `pnpm dev`, `pnpm lint`, `pnpm typecheck`, `pnpm test` (single run), `pnpm validate:levels`, `pnpm build`, `pnpm preview`, and `pnpm test:e2e`. The content validation script can be registered when B2 lands. CI uses the committed lockfile and installs the Playwright browsers it runs. Browser tests start their own production preview. Each feature owner runs relevant checks; the coordinator runs the full set at integration gates.
