@@ -267,7 +267,12 @@ export function Debrief({
         <Panel className={styles.panel}>
           <h2>Query performance</h2>
           <p>{result.selectedPlan.steps.join(" → ")}</p>
-          <div className={styles.tableScroll}>
+          <section
+            className={styles.tableScroll}
+            aria-label="Query performance table"
+            // biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users need focus to scroll the metrics.
+            tabIndex={0}
+          >
             <table>
               <thead>
                 <tr>
@@ -290,7 +295,7 @@ export function Debrief({
                 ))}
               </tbody>
             </table>
-          </div>
+          </section>
         </Panel>
         <Panel className={styles.panel}>
           <h2>Objectives</h2>

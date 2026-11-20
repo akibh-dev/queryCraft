@@ -71,6 +71,29 @@ test("draft survives a visit to the model and browser Back", async ({
   ).toBeEnabled();
 });
 
+test("keyboard users can reach and scroll named metrics regions on a phone", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/levels/w1-l1-needle-in-a-million");
+  await page.getByRole("checkbox", { name: "users.email" }).check();
+  await page.getByRole("button", { name: "Run simulation" }).click();
+  const metrics = page.getByRole("region", { name: "Estimated metrics table" });
+  await tabTo(page, metrics);
+  await expect(metrics).toBeFocused();
+  await page.keyboard.press("ArrowRight");
+  await expect
+    .poll(() => metrics.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(0);
+  const submit = page.getByRole("button", { name: "Submit solution" });
+  await tabTo(page, submit);
+  await page.keyboard.press("Enter");
+  const debrief = page.getByRole("region", { name: "Query performance table" });
+  await tabTo(page, debrief);
+  await expect(debrief).toBeFocused();
+});
+
 test("the longest challenge fits small screens and enlarged text", async ({
   page,
 }) => {

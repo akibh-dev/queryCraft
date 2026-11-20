@@ -88,7 +88,12 @@ export function ResultPanel({
         {formatNumber(metrics.sequentialPagesRead)} sequential and{" "}
         {formatNumber(metrics.randomPagesRead)} random pages.
       </p>
-      <div className={styles.scroll}>
+      <section
+        className={styles.scroll}
+        aria-label="Estimated metrics table"
+        // biome-ignore lint/a11y/noNoninteractiveTabindex: Keyboard users need focus to scroll the metrics.
+        tabIndex={0}
+      >
         <table>
           <caption>Estimated metrics</caption>
           <thead>
@@ -127,7 +132,7 @@ export function ResultPanel({
             })}
           </tbody>
         </table>
-      </div>
+      </section>
       <Button variant="secondary" aria-expanded={comparing} onClick={onCompare}>
         <CompareIcon />
         Compare runs
