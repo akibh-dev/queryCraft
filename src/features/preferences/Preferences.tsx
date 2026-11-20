@@ -19,14 +19,19 @@ export function Preferences({
   async function changeSettings(next: Settings) {
     const current = ++revision.current;
     setPendingSettings(next);
-    await store.saveSettings(next);
-    if (current === revision.current) {
-      setPendingSettings(null);
-      setNotice(
+    let message: string;
+    try {
+      await store.saveSettings(next);
+      message =
         store.getSnapshot().status === "saved"
           ? "Preferences saved."
-          : "Preferences applied for this session.",
-      );
+          : "Preferences applied for this session.";
+    } catch {
+      message = "Could not save preferences.";
+    }
+    if (current === revision.current) {
+      setPendingSettings(null);
+      setNotice(message);
     }
   }
   const [preview, setPreview] = useState<{

@@ -11,6 +11,7 @@ import {
 
 export const progressKey = "querycraft.progress.v1";
 export const maxImportBytes = 256 * 1024;
+const encoder = new TextEncoder();
 const emptyProgress = (): Progress => ({
   schemaVersion: 1,
   completions: [],
@@ -21,6 +22,20 @@ type StorageAccess = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 type Lock = (write: () => void) => Promise<void>;
 type SaveStatus = "saved" | "unavailable" | "invalid";
 type Snapshot = { progress: Progress; status: SaveStatus };
+
+function fitsImportLimit(json: string) {
+  return (
+    json.length <= maxImportBytes &&
+    encoder.encode(json).length <= maxImportBytes
+  );
+}
+
+function serializeProgress(progress: Progress) {
+  const json = JSON.stringify(progress);
+  if (!fitsImportLimit(json))
+    throw new Error("Progress exceeds the limit of 256 KiB.");
+  return json;
+}
 
 function merge(records: Completion[], incoming: Completion[]): Completion[] {
   const combined = [...records];
@@ -88,7 +103,9 @@ export function createProgressStore(
     }
     if (raw === null) return { progress: emptyProgress(), status: "saved" };
     try {
-      return { progress: decode(raw), status: "saved" };
+      const progress = decode(raw);
+      serializeProgress(progress);
+      return { progress, status: "saved" };
     } catch {
       return { progress: snapshot.progress, status: "invalid" };
     }
@@ -100,12 +117,14 @@ export function createProgressStore(
         status: "unavailable",
       };
     const disk = read();
-    return disk.status === "saved"
-      ? {
-          progress: pending.reduce((p, change) => change(p), disk.progress),
-          status: "saved",
-        }
-      : disk;
+    if (disk.status !== "saved" || pending.length === 0) return disk;
+    try {
+      const progress = pending.reduce((p, change) => change(p), disk.progress);
+      serializeProgress(progress);
+      return { progress, status: "saved" };
+    } catch {
+      return { progress: snapshot.progress, status: "unavailable" };
+    }
   }
   function loadProgress() {
     const { progress, status } = latest();
@@ -135,7 +154,7 @@ export function createProgressStore(
     return enqueue(() => {
       const current = latest();
       const progress = change(current.progress);
-      const raw = JSON.stringify(progress);
+      const raw = serializeProgress(progress);
       if (current.status !== "saved" && !pendingReset) {
         pending.push(change);
         publish(progress, current.status);
@@ -154,10 +173,7 @@ export function createProgressStore(
     });
   }
   function importData(json: string) {
-    if (
-      json.length > maxImportBytes ||
-      new TextEncoder().encode(json).length > maxImportBytes
-    )
+    if (!fitsImportLimit(json))
       throw new Error("Import a file of 256 KiB or less.");
     return decode(json);
   }
@@ -177,8 +193,12 @@ export function createProgressStore(
       };
     },
     loadProgress,
-    exportProgress: () => JSON.stringify(snapshot.progress, null, 2),
-    previewImport: (json: string) => importedChange(json)(snapshot.progress),
+    exportProgress: () => serializeProgress(snapshot.progress),
+    previewImport(json: string) {
+      const progress = importedChange(json)(snapshot.progress);
+      serializeProgress(progress);
+      return progress;
+    },
     importProgress: (json: string) => update(importedChange(json)),
     saveCompletion(raw: Completion) {
       const record = validateRecord(raw);
