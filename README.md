@@ -2,6 +2,14 @@
 
 QueryCraft is a six-puzzle browser game about SQL query performance. Choose indexes for a fixed query, compare the estimated plans, and meet each puzzle’s latency, storage, and write budgets. The model runs locally. Completions and preferences stay in the browser and can be exported from Settings.
 
+Learn when an index saves reads, when the planner prefers a scan, and how faster reads can increase storage and write costs.
+
+## Game preview
+
+![QueryCraft desktop challenge for Needle in a Million](docs/media/querycraft-desktop-challenge.png)
+
+[Mobile results](docs/media/querycraft-mobile-results.png) · [Keyboard tutorial recording](docs/media/querycraft-tutorial.webm)
+
 ## Run locally
 
 Use Node 24.22.0 and pnpm 12.21.0.
@@ -34,3 +42,9 @@ The level checks verify hand-authored result rows, reference solutions, distract
 - [Cost model, scoring and save format](plan/03-engine-and-contracts.md)
 - [Campaign recipes and authoring procedure](plan/04-levels.md)
 - [Integration and release checks](plan/05-release.md)
+- [Level-authoring walkthrough](docs/level-authoring.md)
+- [Cost model reference](docs/model.md)
+- [Architecture and accessibility](docs/architecture.md)
+- [Contributing and reporting issues](docs/contributing.md)
+- [Release record](docs/release.md)
+- [Changelog](docs/changelog.md)
