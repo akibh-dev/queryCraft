@@ -1,0 +1,21 @@
+{
+	"id": "w1-l2-name-collision-sample",
+	"rows": [
+		{
+			"id": 1,
+			"name": "Sam",
+			"email": "a@example.test"
+		},
+		{
+			"id": 2,
+			"name": "Lee",
+			"email": "b@example.test"
+		},
+		{
+			"id": 3,
+			"name": "Sam",
+			"email": "c@example.test"
+		}
+	],
+	"expectedRows": [["a@example.test"], ["c@example.test"]]
+}

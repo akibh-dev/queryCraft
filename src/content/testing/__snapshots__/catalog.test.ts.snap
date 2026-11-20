@@ -1,0 +1,551 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`validates the fixture, objectives and every optional selection for Name Collision 1`] = `
+{
+  "initial": [],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 32768,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 128,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 800000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 3.1,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 800.768,
+        "estimatedLatencyMs": 16.115360000000003,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 128,
+        "randomPagesRead": 0,
+        "rowsExamined": 32768,
+        "sequentialPagesRead": 768,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of contacts",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 128,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 128,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 786432,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 786432,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 800000,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 3,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 3.1,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_contacts_name",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 480.128,
+        "estimatedLatencyMs": 9.70256,
+        "indexPagesTraversed": 2,
+        "indexStorageBytes": 786432,
+        "matchingRows": 128,
+        "randomPagesRead": 120,
+        "rowsExamined": 128,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 3,
+      },
+      "plan": {
+        "indexId": "idx_contacts_name",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on contacts.name",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 32768,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 128,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1572864,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1000000,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1572864,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 800000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 4.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 3.1,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_contacts_email",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 800.768,
+        "estimatedLatencyMs": 16.115360000000003,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 1572864,
+        "matchingRows": 128,
+        "randomPagesRead": 0,
+        "rowsExamined": 32768,
+        "sequentialPagesRead": 768,
+        "writeOverheadPct": 4.5,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of contacts",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 128,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 128,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 2359296,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 1000000,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 2359296,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 800000,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 7.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 3.1,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_contacts_email",
+        "idx_contacts_name",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 480.128,
+        "estimatedLatencyMs": 9.70256,
+        "indexPagesTraversed": 2,
+        "indexStorageBytes": 2359296,
+        "matchingRows": 128,
+        "randomPagesRead": 120,
+        "rowsExamined": 128,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 7.5,
+      },
+      "plan": {
+        "indexId": "idx_contacts_name",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on contacts.name",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;
+
+exports[`validates the fixture, objectives and every optional selection for Needle in a Million 1`] = `
+{
+  "initial": [],
+  "levelVersion": 1,
+  "modelVersion": "mvp-1",
+  "runs": [
+    {
+      "checks": [
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": ">=",
+            "metric": "latencyReductionPct",
+            "value": 70,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 42000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1000000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 2.3,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [],
+      "metrics": {
+        "estimatedCostUnits": 16625,
+        "estimatedLatencyMs": 332.6,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 0,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 1000000,
+        "sequentialPagesRead": 15625,
+        "writeOverheadPct": 0,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of users",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 99.87371617558628,
+          "objective": {
+            "comparator": ">=",
+            "metric": "latencyReductionPct",
+            "value": 70,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 40001536,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 42000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 2.25,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 2.3,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_users_email",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 40001536,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 2.25,
+      },
+      "plan": {
+        "indexId": "idx_users_email",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on users.email",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 3,
+    },
+    {
+      "checks": [
+        {
+          "actual": 0,
+          "objective": {
+            "comparator": ">=",
+            "metric": "latencyReductionPct",
+            "value": 70,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 24002560,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 42000000,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1000000,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": false,
+          "tier": "silver",
+        },
+        {
+          "actual": 2.25,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 2.3,
+          },
+          "passed": true,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_users_name",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16625,
+        "estimatedLatencyMs": 332.6,
+        "indexPagesTraversed": 0,
+        "indexStorageBytes": 24002560,
+        "matchingRows": 1,
+        "randomPagesRead": 0,
+        "rowsExamined": 1000000,
+        "sequentialPagesRead": 15625,
+        "writeOverheadPct": 2.25,
+      },
+      "plan": {
+        "kind": "scan",
+        "steps": [
+          "Sequential scan of users",
+          "Filter rows by the query predicates",
+        ],
+      },
+      "stars": 0,
+    },
+    {
+      "checks": [
+        {
+          "actual": 99.87371617558628,
+          "objective": {
+            "comparator": ">=",
+            "metric": "latencyReductionPct",
+            "value": 70,
+          },
+          "passed": true,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 64004096,
+          "objective": {
+            "comparator": "<=",
+            "metric": "indexStorageBytes",
+            "value": 42000000,
+          },
+          "passed": false,
+          "tier": "mandatory",
+        },
+        {
+          "actual": 1,
+          "objective": {
+            "comparator": "<=",
+            "metric": "rowsExamined",
+            "value": 1,
+          },
+          "passed": true,
+          "tier": "silver",
+        },
+        {
+          "actual": 4.5,
+          "objective": {
+            "comparator": "<=",
+            "metric": "writeOverheadPct",
+            "value": 2.3,
+          },
+          "passed": false,
+          "tier": "gold",
+        },
+      ],
+      "choices": [
+        "idx_users_email",
+        "idx_users_name",
+      ],
+      "metrics": {
+        "estimatedCostUnits": 16.001,
+        "estimatedLatencyMs": 0.42002000000000006,
+        "indexPagesTraversed": 3,
+        "indexStorageBytes": 64004096,
+        "matchingRows": 1,
+        "randomPagesRead": 4,
+        "rowsExamined": 1,
+        "sequentialPagesRead": 0,
+        "writeOverheadPct": 4.5,
+      },
+      "plan": {
+        "indexId": "idx_users_email",
+        "kind": "equality",
+        "steps": [
+          "B-tree lookup on users.email",
+          "Fetch matching rows",
+        ],
+      },
+      "stars": 0,
+    },
+  ],
+}
+`;

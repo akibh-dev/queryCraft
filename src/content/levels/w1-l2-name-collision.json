@@ -1,0 +1,110 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l2-name-collision",
+	"worldId": "w1",
+	"title": "Name Collision",
+	"description": "Support needs the email address of every contact named Sam. Reduce the number of rows examined while keeping every match.",
+	"conceptTags": ["Equality lookup", "Repeated keys"],
+	"table": {
+		"name": "contacts",
+		"rowCount": 32768,
+		"avgRowBytes": 192,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 32768
+				}
+			},
+			{
+				"name": "name",
+				"type": "text",
+				"averageBytes": 16,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 256
+				}
+			},
+			{
+				"name": "email",
+				"type": "text",
+				"averageBytes": 40,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 32768
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_contacts",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 90,
+		"insertsPerSecond": 10,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "contacts",
+		"select": ["email"],
+		"predicates": [
+			{
+				"op": "eq",
+				"column": "name",
+				"value": "Sam"
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_contacts_name",
+			"column": "name"
+		},
+		{
+			"id": "idx_contacts_email",
+			"column": "email"
+		}
+	],
+	"initialIndexIds": [],
+	"objectives": [
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 128
+		},
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 1000000
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 800000
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 3.1
+		}
+	],
+	"hints": [
+		"Which column appears after WHERE?",
+		"Several people share each name.",
+		"Try indexing name alone and inspect rows examined."
+	],
+	"lesson": "A name lookup finds several matching contacts. Indexing the filter narrows the search even when the key repeats, while each maintained index consumes space and write work.",
+	"fixtureId": "w1-l2-name-collision-sample"
+}
