@@ -7,7 +7,7 @@ it.each([
   [tutorialPath, "challenge"],
   [`${tutorialPath}/debrief/`, "debrief"],
   ["/levels/w1-l2-name-collision", "locked"],
-  ["/levels/w1-l6-price-of-an-index/debrief", "locked"],
+  ["/levels/w1-l2-name-collision/debrief", "locked"],
   ["/levels/missing", "missingLevel"],
   ["/levels/missing/debrief", "missingLevel"],
   [`${tutorialPath}/extra`, "missing"],
