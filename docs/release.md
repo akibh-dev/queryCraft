@@ -21,13 +21,13 @@ Chromium’s browser zoom was also set to 200% and verified independently of the
 
 ## Forgejo review
 
-Phase A is open for review. The Phase B, C, and D branches are on Forgejo. After each phase merges, reconcile the next branch with Forgejo `main`, open its review and verify GitHub Actions for the mirrored merge SHA. Release preparation follows Phase D review. [Phase A pull request](https://git.akibh.dev/akib/queryCraft/pulls/2)
+Phases A through D are consolidated into one initial release review targeting Forgejo `main`. After merge, verify GitHub Actions for the mirrored merge SHA. [Initial release pull request](https://git.akibh.dev/akib/queryCraft/pulls/2)
 
 ## Pending release checks
 
 - A first-time player tutorial observation and a manual screen-reader pass.
 - Owner approval of the project license and confirmation of a dedicated security contact.
-- The remaining Forgejo phase reviews and GitHub mirror CI for their merge commits.
+- Forgejo initial release review and GitHub mirror CI for its merge commit.
 - Authorized preview and production deployment. The source tag, deployment ID, hostname and previous known-good deployment are pending publication.
 - Hosted verification of HTTPS, headers, deep links, mobile play, offline replay and service-worker upgrade with existing progress.
 
