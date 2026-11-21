@@ -1,0 +1,113 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l4-range-runner",
+	"worldId": "w1",
+	"title": "Range Runner",
+	"description": "A scorekeeper needs the IDs of entries scoring 400 up to, but excluding, 402. Find the interval within the index storage budget.",
+	"conceptTags": ["Range lookup", "Half-open interval"],
+	"table": {
+		"name": "scores",
+		"rowCount": 100000,
+		"avgRowBytes": 256,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 100000
+				}
+			},
+			{
+				"name": "points",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 1000,
+					"min": 0,
+					"maxExclusive": 1000
+				}
+			},
+			{
+				"name": "player_id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 20000
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_scores",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 95,
+		"insertsPerSecond": 5,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "scores",
+		"select": ["id"],
+		"predicates": [
+			{
+				"op": "range",
+				"column": "points",
+				"gte": 400,
+				"lt": 402
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_scores_points",
+			"column": "points"
+		},
+		{
+			"id": "idx_scores_player_id",
+			"column": "player_id"
+		}
+	],
+	"initialIndexIds": [],
+	"objectives": [
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 200
+		},
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 2000000
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 1610000
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 1.6
+		}
+	],
+	"hints": [
+		"Which column defines the interval?",
+		"The upper boundary is excluded.",
+		"Add the points index and inspect where its range starts and stops."
+	],
+	"lesson": "The ordered points index locates adjacent keys in the requested interval. The plan still fetches matching rows from the table and maintains the index on writes.",
+	"fixtureId": "w1-l4-range-runner-sample"
+}

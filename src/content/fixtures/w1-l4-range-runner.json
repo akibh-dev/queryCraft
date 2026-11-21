@@ -1,0 +1,26 @@
+{
+	"id": "w1-l4-range-runner-sample",
+	"rows": [
+		{
+			"id": 1,
+			"points": 399,
+			"player_id": 5
+		},
+		{
+			"id": 2,
+			"points": 400,
+			"player_id": 5
+		},
+		{
+			"id": 3,
+			"points": 401,
+			"player_id": 6
+		},
+		{
+			"id": 4,
+			"points": 402,
+			"player_id": 6
+		}
+	],
+	"expectedRows": [[2], [3]]
+}

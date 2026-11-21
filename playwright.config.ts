@@ -5,6 +5,7 @@ export default defineConfig({
   testDir: "./tests/e2e",
   use: {
     baseURL,
+    serviceWorkers: "block",
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH,
     },

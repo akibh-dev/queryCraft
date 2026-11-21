@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { App } from "./App";
+import { App } from "./app/App";
+import "./styles/base.css";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Missing application root");

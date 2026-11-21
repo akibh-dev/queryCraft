@@ -1,0 +1,41 @@
+.preview {
+	min-block-size: 100vh;
+	padding: var(--space-8) var(--space-4);
+	background: var(--canvas);
+	color: var(--text);
+}
+
+.content {
+	max-inline-size: 44rem;
+	margin-inline: auto;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+	color: var(--accent);
+	font-weight: 650;
+}
+
+.content h1 {
+	margin-block: var(--space-4) var(--space-6);
+}
+
+.controls {
+	display: grid;
+	gap: var(--space-6);
+}
+
+.controls input[type="file"] {
+	min-block-size: var(--touch-target);
+	max-inline-size: 100%;
+}
+
+.themes,
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: var(--space-2);
+}

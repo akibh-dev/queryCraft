@@ -1,0 +1,24 @@
+{
+	"id": "w1-l6-price-of-an-index-sample",
+	"rows": [
+		{
+			"id": 1,
+			"request_id": "req-41",
+			"actor_id": 7,
+			"category": "sync"
+		},
+		{
+			"id": 2,
+			"request_id": "req-42",
+			"actor_id": 7,
+			"category": "sync"
+		},
+		{
+			"id": 3,
+			"request_id": "req-43",
+			"actor_id": 8,
+			"category": "push"
+		}
+	],
+	"expectedRows": [[2]]
+}

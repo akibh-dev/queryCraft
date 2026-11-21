@@ -1,0 +1,22 @@
+{
+	"id": "w1-l5-the-common-case-sample",
+	"rows": [
+		{
+			"id": 1,
+			"status": "open"
+		},
+		{
+			"id": 2,
+			"status": "closed"
+		},
+		{
+			"id": 3,
+			"status": "open"
+		},
+		{
+			"id": 4,
+			"status": "closed"
+		}
+	],
+	"expectedRows": [[1], [3]]
+}

@@ -1,0 +1,110 @@
+{
+	"schemaVersion": 1,
+	"modelVersion": "mvp-1",
+	"levelVersion": 1,
+	"id": "w1-l1-needle-in-a-million",
+	"worldId": "w1",
+	"title": "Needle in a Million",
+	"description": "A support agent needs one account by email. Help them find it quickly without spending the entire index budget.",
+	"conceptTags": ["Equality lookup", "Unique keys"],
+	"table": {
+		"name": "users",
+		"rowCount": 1000000,
+		"avgRowBytes": 128,
+		"columns": [
+			{
+				"name": "id",
+				"type": "bigint",
+				"averageBytes": 8,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 1000000
+				}
+			},
+			{
+				"name": "email",
+				"type": "text",
+				"averageBytes": 32,
+				"distribution": {
+					"kind": "unique",
+					"distinctCount": 1000000
+				}
+			},
+			{
+				"name": "name",
+				"type": "text",
+				"averageBytes": 16,
+				"distribution": {
+					"kind": "uniform",
+					"distinctCount": 10000
+				}
+			}
+		],
+		"fixedIndexes": [
+			{
+				"id": "pk_users",
+				"column": "id"
+			}
+		]
+	},
+	"workload": {
+		"readsPerSecond": 95,
+		"insertsPerSecond": 5,
+		"updatesPerSecond": 0
+	},
+	"referenceQuery": {
+		"table": "users",
+		"select": ["id", "email"],
+		"predicates": [
+			{
+				"op": "eq",
+				"column": "email",
+				"value": "sample@example.test"
+			}
+		]
+	},
+	"indexOptions": [
+		{
+			"id": "idx_users_email",
+			"column": "email"
+		},
+		{
+			"id": "idx_users_name",
+			"column": "name"
+		}
+	],
+	"initialIndexIds": [],
+	"objectives": [
+		{
+			"metric": "latencyReductionPct",
+			"comparator": ">=",
+			"value": 70
+		},
+		{
+			"metric": "indexStorageBytes",
+			"comparator": "<=",
+			"value": 42000000
+		}
+	],
+	"silverObjectives": [
+		{
+			"metric": "rowsExamined",
+			"comparator": "<=",
+			"value": 1
+		}
+	],
+	"goldObjectives": [
+		{
+			"metric": "writeOverheadPct",
+			"comparator": "<=",
+			"value": 2.3
+		}
+	],
+	"hints": [
+		"Which column filters the users?",
+		"Exactly one email matches.",
+		"Add the email index and run again."
+	],
+	"lesson": "The scan visits the entire users table. An index on email locates the matching key, then fetches the account. That index takes space and adds work to inserts.",
+	"fixtureId": "w1-l1-needle-in-a-million-sample"
+}
